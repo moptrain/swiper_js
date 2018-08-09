@@ -8,10 +8,10 @@ $('.btn').toggle();//一开始btn是隐藏的
 
 function change(newid) {
     //这个newid不是offset，是第几个图片
+    console.log("new id "+newid);
     newid=newid-1;
     $('.recommandphoto').fadeOut(sliderdata.changetime);
     setTimeout(function () {
-        console.log(newid);
         $('.recommandlink').attr({href:sliderdata.picData[newid][1]});
         $('.recommandphoto').attr({src:sliderdata.picData[newid][0]});
     },sliderdata.changetime);
@@ -20,28 +20,22 @@ function change(newid) {
 }
 var timeid;
 function startswipe() {
+
     timerid=setInterval(function () {
-        change (sliderdata.nowid+1);
-        sliderdata.nowid=(sliderdata.nowid+1)%sliderdata["picData"].length;
+        console.log('没改之前是'+sliderdata.nowid);
+        var tmp=(sliderdata.nowid+1)%(sliderdata["picData"].length+1);
+        sliderdata.nowid=(!tmp?1:tmp);
+        change (sliderdata.nowid);
+
     } ,sliderdata.eachtime);
 }
 startswipe();
 
-$('.controller').click(function () {
-    clearInterval(timerid);
-})
-$('.controller2').click(function () {
-    timerid=setInterval(function () {
-        change (sliderdata.nowid+1);
-        sliderdata.nowid=(sliderdata.nowid+1)%sliderdata["picData"].length;
-    } ,sliderdata.eachtime);
-})
 function mousemovehandler(){
     $('.slider').mousemove(function (event) {
         console.log(event);
         clearInterval(timerid);
         $('.slider').off('mousemove');
-
         //一次就行，以免以后鼠标在里面动的时候影响性能
         $('.btn').toggle();
         //改变btn的状态
@@ -56,3 +50,17 @@ $('.slider').mouseout(function (event) {
     $('.btn').toggle();
     //离开的时候也要改变btn的状态
 })
+$('.btn:first').click(
+    function () {
+        var tmp=(sliderdata.nowid-1);
+        sliderdata.nowid=(!tmp?sliderdata["picData"].length:tmp);
+        change (sliderdata.nowid);
+    }
+)
+$('.btn-left').click(
+    function () {//实际上和计时里的操作一样
+        var tmp=(sliderdata.nowid+1)%(sliderdata["picData"].length+1);
+        sliderdata.nowid=(!tmp?1:tmp);
+        change (sliderdata.nowid);
+    }
+)
