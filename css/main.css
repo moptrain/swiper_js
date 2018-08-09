@@ -4,15 +4,26 @@
 }
 .container{
     background-color: crimson;
+    position: relative;
 }
 .slider{
     background-color: darkolivegreen;
     margin: 0px auto;
     width: 830px;
     height: 440px;
+    position: relative;
 }
 .recommandlink{
     display: inline-block;
-
-
+}
+.btn{
+    height: 64px;
+    width: 30px;
+    background-color: aqua;
+    position: absolute;
+    bottom:200px;
+    z-index: 10;
+}
+.btn-left{
+    right: 0px;
 }
