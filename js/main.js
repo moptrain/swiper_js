@@ -2,13 +2,12 @@ sliderdata={
     eachtime:1000,
     changetime:100,
     nowid:1,
-    picData:[["./img/1.jpg",'http://www.jd.com'],["./img/2.jpg",'http://www.qq.com'],["./img/3.jpg","http://www.163.com"],["./img/4.jpg",'http://www.baidu.com'],],
+    picData:[["./img/1.jpg",'http://www.jd.com'],["./img/2.jpg",'http://www.qq.com'],["./img/3.jpg","http://www.163.com"],["./img/4.jpg",'http://www.baidu.com'],["./img/4.jpg",'http://www.baidu.com'],],
 }
 $('.btn').toggle();//一开始btn是隐藏的
 
 function change(newid) {
     //这个newid不是offset，是第几个图片
-
     $('.circle-item').css({backgroundColor:' rgba(0,0,0,0.3)'})//把所有小圆点恢复到没选中
     //下面的代码转换下面小白点
     $("div[itemid=" + newid+ "]").css({backgroundColor:' rgba(255,255,255,0.9)'})
@@ -23,36 +22,28 @@ function change(newid) {
 }
 var timeid;
 function startswipe() {
-
+    console.log('setInterval...from '+sliderdata.nowid);
     timerid=setInterval(function () {
+        var olddd=sliderdata.nowid
         var tmp=(sliderdata.nowid+1)%(sliderdata["picData"].length+1);
         sliderdata.nowid=(!tmp?1:tmp);
+        console.log(olddd+"下一个是"+sliderdata.nowid)
         change (sliderdata.nowid);
-
     } ,sliderdata.eachtime);
 }
-change(3);
 startswipe();
-
-function mousemovehandler(){
-    $('.slider').mousemove(function (event) {
-        clearInterval(timerid);
-        $('.slider').off('mousemove');
-        //一次就行，以免以后鼠标在里面动的时候影响性能
-        $('.btn').toggle();
-        //改变btn的状态
-    })
-}
-
-mousemovehandler();
-$('.slider').mouseout(function (event) {
-    console.log(event);
-    startswipe();
-    mousemovehandler();
-    //出来之后在给他绑上事件
+$('.slider').mouseenter(function (event) {
+    console.log('clearInterval ...')
+    clearInterval(timerid);
+    console.log("mouseenter"+event)
     $('.btn').toggle();
-    //离开的时候也要改变btn的状态
 })
+$('.slider').mouseleave(function (event) {
+    startswipe();
+    console.log("mouseleave"+event)
+    $('.btn').toggle();
+})
+
 $('.btn:first').click(
     function () {
         var tmp=(sliderdata.nowid-1);
@@ -83,8 +74,9 @@ for (var i=0;i<sliderdata["picData"].length;i++){
 
 for (var i=0;i<sliderdata["picData"].length;i++){
     var tmpstring=(i+1).toString()
-    $("div[itemid=" + tmpstring + "]").click({id:tmpstring},function (event) {// 这是给里面函数穿数据的方法,jQuery属性选择器选择动态变量在变量前后添加“+"
-        change(event.data.id);
-        clearInterval(timerid);
+    $("div[itemid=" + tmpstring + "]").mouseenter({id:tmpstring},function (event) {// 这是给里面函数穿数据的方法,jQuery属性选择器选择动态变量在变量前后添加“+"
+        sliderdata.nowid=parseInt(event.data.id);
+        console.log('点了一下'+sliderdata.nowid)
+        change(sliderdata.nowid);
     })
 }
