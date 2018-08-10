@@ -61,7 +61,6 @@ $('.btn-right').click(
 $('.btn a').click(function (event) {
     event.preventDefault();
 })
-$('body').append($('<input type="button" value="点我" class="controller">'))
 $('#circle-wraaper').css("width",sliderdata["picData"].length*50)
 for (var i=0;i<sliderdata["picData"].length;i++){
     var ii=i+1
