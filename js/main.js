@@ -52,15 +52,19 @@ $('.slider').mouseout(function (event) {
 })
 $('.btn:first').click(
     function () {
+        console.log('zuobian')
         var tmp=(sliderdata.nowid-1);
         sliderdata.nowid=(!tmp?sliderdata["picData"].length:tmp);
         change (sliderdata.nowid);
     }
 )
-$('.btn-left').click(
+$('.btn-right').click(
     function () {//实际上和计时里的操作一样
         var tmp=(sliderdata.nowid+1)%(sliderdata["picData"].length+1);
         sliderdata.nowid=(!tmp?1:tmp);
         change (sliderdata.nowid);
     }
 )
+$('.btn a').click(function (event) {
+    event.preventDefault();
+})

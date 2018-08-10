@@ -19,11 +19,40 @@
 .btn{
     height: 64px;
     width: 30px;
-    background-color: aqua;
     position: absolute;
     bottom:200px;
     z-index: 10;
 }
-.btn-left{
+.btn-right{
     right: 0px;
 }
+.btn-link{
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    /*background-color: rgba(0,0,0,0.3);*/
+
+
+}
+#btn-back-left{
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    background: url("../img/allbtn.png") no-repeat -84px -145px;
+}
+#btn-back-left:hover{
+    display: inline-block;
+    background: url("../img/allbtn.png") no-repeat -163px -145px;
+}
+
+#btn-back-right{
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    background: url("../img/allbtn.png") no-repeat -117px -145px;
+}
+#btn-back-right:hover{
+    display: inline-block;
+    background: url("../img/allbtn.png") no-repeat -195px -145px;
+}
+
