@@ -2,7 +2,7 @@ sliderdata={
     eachtime:1000,
     changetime:100,
     nowid:1,
-    picData:[["./img/1.jpg",'http://www.jd.com'],["./img/2.jpg",'http://www.qq.com'],["./img/3.jpg","http://www.163.com"],["./img/4.jpg",'http://www.baidu.com'],["./img/4.jpg",'http://www.baidu.com'],],
+    picData:[["./img/1.jpg",'http://www.jd.com'],["./img/2.jpg",'http://www.qq.com'],["./img/3.jpg","http://www.163.com"],["./img/4.jpg",'http://www.baidu.com'],],
 }
 $('.btn').toggle();//一开始btn是隐藏的
 
