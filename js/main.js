@@ -1,24 +1,26 @@
 sliderdata={
-    eachtime:1000,
-    changetime:100,
+    eachtime:3000,
+    changetime:150,
     nowid:1,
     picData:[["./img/1.jpg",'http://www.jd.com'],["./img/2.jpg",'http://www.qq.com'],["./img/3.jpg","http://www.163.com"],["./img/4.jpg",'http://www.baidu.com'],],
 }
 $('.btn').toggle();//一开始btn是隐藏的
 
 function change(newid) {
+    //改变的逻辑是，先把旧的图片隐藏，
     //这个newid不是offset，是第几个图片
     $('.circle-item').css({backgroundColor:' rgba(0,0,0,0.3)'})//把所有小圆点恢复到没选中
-    //下面的代码转换下面小白点
-    $("div[itemid=" + newid+ "]").css({backgroundColor:' rgba(255,255,255,0.9)'})
-    newid=newid-1;
     $('.recommandphoto').fadeOut(sliderdata.changetime);
     setTimeout(function () {
+        //下面的代码转换下面小白点
+        $("div[itemid=" + newid+ "]").css({backgroundColor:' rgba(255,255,255,0.9)'})
+        newid=newid-1;
         $('.recommandlink').attr({href:sliderdata.picData[newid][1]});
         $('.recommandphoto').attr({src:sliderdata.picData[newid][0]});
+        $('.recommandphoto').fadeIn(sliderdata.changetime);
     },sliderdata.changetime);
     //否则，会在fadeout执行后立刻改变img的src，接着改变后的scr在一段时间内fadeOut.
-    $('.recommandphoto').fadeIn(sliderdata.changetime);
+
 }
 var timeid;
 function startswipe() {
