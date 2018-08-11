@@ -4,6 +4,27 @@ sliderdata={
     nowid:1,
     picData:[["./img/1.jpg",'http://www.jd.com'],["./img/2.jpg",'http://www.qq.com'],["./img/3.jpg","http://www.163.com"],["./img/4.jpg",'http://www.baidu.com'],],
 }
+
+//小白点的创建与时间绑定
+$('#circle-wraaper').css("width",sliderdata["picData"].length*50)
+for (var i=0;i<sliderdata["picData"].length;i++){
+    var ii=i+1
+    tmpstring='itemid='+ii.toString();
+    tmpstring='<div class="circle-item"'+tmpstring+'></div>'
+    // $('#circle-wraaper').append($('<div class="circle-item"></div>'));
+    $('#circle-wraaper').append($(tmpstring))
+}
+for (var i=0;i<sliderdata["picData"].length;i++){
+    var tmpstring=(i+1).toString()
+    $("div[itemid=" + tmpstring + "]").mouseenter({id:tmpstring},function (event) {// 这是给里面函数穿数据的方法,jQuery属性选择器选择动态变量在变量前后添加“+"
+        sliderdata.nowid=parseInt(event.data.id);
+        console.log('点了一下'+sliderdata.nowid)
+        change(sliderdata.nowid);
+    })
+}
+//小白点的创建与时间绑定结束
+
+$("div[itemid=1]").css({backgroundColor:' rgba(255,255,255,0.9)'});
 $('.btn').toggle();//一开始btn是隐藏的
 
 function change(newid) {
@@ -63,21 +84,4 @@ $('.btn-right').click(
 $('.btn a').click(function (event) {
     event.preventDefault();
 })
-$('#circle-wraaper').css("width",sliderdata["picData"].length*50)
-for (var i=0;i<sliderdata["picData"].length;i++){
-    var ii=i+1
-    tmpstring='itemid='+ii.toString();
-    tmpstring='<div class="circle-item"'+tmpstring+'></div>'
-    // $('#circle-wraaper').append($('<div class="circle-item"></div>'));
-    $('#circle-wraaper').append($(tmpstring))
-}
-//以上代码创建下面的小圆点
 
-for (var i=0;i<sliderdata["picData"].length;i++){
-    var tmpstring=(i+1).toString()
-    $("div[itemid=" + tmpstring + "]").mouseenter({id:tmpstring},function (event) {// 这是给里面函数穿数据的方法,jQuery属性选择器选择动态变量在变量前后添加“+"
-        sliderdata.nowid=parseInt(event.data.id);
-        console.log('点了一下'+sliderdata.nowid)
-        change(sliderdata.nowid);
-    })
-}
